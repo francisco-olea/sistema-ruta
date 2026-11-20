@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useCallback } from "react"
+import Image from "next/image"
 import { useAuth } from "@/lib/auth-context"
 import { useAppData } from "@/lib/data-context"
 import { DAYS, COMPANY_NAME, type DayName } from "@/lib/mock-data"
@@ -9,7 +10,6 @@ import { RouteTable } from "./route-table"
 import { RouteDetail } from "./route-detail"
 import { ClientsTable } from "./clients-table"
 import {
-  Droplets,
   Menu,
   X,
   LogOut,
@@ -77,8 +77,14 @@ export function Dashboard() {
         {/* Sidebar header */}
         <div className="flex items-center justify-between border-b border-sidebar-border p-4">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-sidebar-primary">
-              <Droplets className="h-5 w-5 text-sidebar-primary-foreground" />
+            <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white p-1.5">
+              <Image
+                src="/logo%20sp.png"
+                alt={`${COMPANY_NAME} logo`}
+                width={512}
+                height={512}
+                className="h-full w-full object-contain"
+              />
             </div>
             <div>
               <p className="text-sm font-bold text-sidebar-foreground">{COMPANY_NAME}</p>

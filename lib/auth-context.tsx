@@ -15,6 +15,7 @@ const TEST_USER: User = {
 interface AuthContextType {
   user: User | null
   isLoading: boolean
+  isNewLogin: boolean
   login: (username: string, password: string) => Promise<boolean>
   logout: () => void
 }
@@ -24,6 +25,7 @@ const AuthContext = createContext<AuthContextType | null>(null)
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<User | null>(null)
   const [isLoading, setIsLoading] = useState(true)
+  const [isNewLogin, setIsNewLogin] = useState(false)
 
   useEffect(() => {
     const storedUser = localStorage.getItem(AUTH_USER_STORAGE_KEY)
@@ -48,6 +50,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
 
     setUser(TEST_USER)
+    setIsNewLogin(true)
     localStorage.setItem(AUTH_USER_STORAGE_KEY, JSON.stringify(TEST_USER))
 
     setIsLoading(false)
@@ -57,10 +60,11 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const logout = useCallback(() => {
     localStorage.removeItem(AUTH_USER_STORAGE_KEY)
     setUser(null)
+    setIsNewLogin(false)
   }, [])
 
   return (
-    <AuthContext.Provider value={{ user, isLoading, login, logout }}>
+    <AuthContext.Provider value={{ user, isLoading, isNewLogin, login, logout }}>
       {children}
     </AuthContext.Provider>
   )

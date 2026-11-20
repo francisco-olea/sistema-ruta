@@ -1,9 +1,10 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import { useAuth } from "@/lib/auth-context"
 import { COMPANY_NAME } from "@/lib/mock-data"
-import { Droplets, Eye, EyeOff } from "lucide-react"
+import { Eye, EyeOff } from "lucide-react"
 
 export function LoginPage() {
   const { login } = useAuth()
@@ -28,8 +29,15 @@ export function LoginPage() {
     <div className="flex min-h-dvh items-center justify-center bg-primary p-4">
       <div className="w-full max-w-sm">
         <div className="mb-8 flex flex-col items-center gap-3">
-          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-primary-foreground/10 backdrop-blur-sm">
-            <Droplets className="h-9 w-9 text-primary-foreground" />
+          <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white p-2">
+            <Image
+              src="/logo%20sp.png"
+              alt={`${COMPANY_NAME} logo`}
+              width={512}
+              height={512}
+              className="h-full w-full object-contain"
+              priority
+            />
           </div>
           <h1 className="text-2xl font-bold tracking-tight text-primary-foreground text-balance text-center">
             {COMPANY_NAME}
